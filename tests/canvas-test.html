@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Canvas</title>
+      <style media="screen">
+         body{
+            background: #555;
+         }
+      </style>
+   </head>
+   <body>
+      <section id="container">
+
+      </section>
+      <script>
+      var NUM_PARTICLES = ( ( ROWS = 100 ) * ( COLS = 100 ) ),
+      THICKNESS = Math.pow( 80, 2 ),
+      SPACING = 3,
+      MARGIN = 100,
+      COLOR = 220,
+      DRAG = 0.95,
+      EASE = 0.25,
+
+      particle = {
+        vx: 0,
+        vy: 0,
+        x: 0,
+        y: 0
+      };
+
+         function init() {
+            container = document.querySelector('#container')
+            canvas = document.createElement('canvas')
+            ctx = canvas.getContext('2d')
+
+            w = canvas.width = COLS * SPACING + MARGIN * 2;
+            h = canvas.height = ROWS * SPACING + MARGIN * 2;
+
+            list = []
+
+            for(i = 0; i < NUM_PARTICLES; i++) {
+               p = Object.create(particle);
+               p.x = p.ox = MARGIN + SPACING * ( i % COLS );
+               p.y = p.oy = MARGIN + SPACING * Math.floor( i / COLS );
+               ctx.fillStyle = "green";
+               console.log('ok');
+               ctx.rect(p.x, p.y, 10, 10);
+               list[i] = p;
+            }
+
+            container.appendChild(canvas)
+         }
+
+         init()
+
+      </script>
+   </body>
+</html>

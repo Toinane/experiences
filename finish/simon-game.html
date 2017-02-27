@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Simon game</title>
+      <style media="screen">
+         body{text-align: center;}
+         #simon{
+            margin: auto;
+            width: 210px;
+            height: 200px;
+         }
+            #simon section{
+               display: inline-block;
+               width: 100px; height: 100px;
+
+            }
+            #simon.turn section{
+               cursor: pointer;
+            }
+            #simon section:nth-child(even){
+
+            }
+            .red{ background: #FB5942; }
+            .red.active{ background: #FA361A; }
+            .blue{ background: #59B5FD; }
+            .blue.active{ background: #0991FD; }
+            .green{ background: #62B84A; }
+            .green.active{ background: #4A8D37; }
+            .yellow{ background: #FFC857; }
+            .yellow.active{ background: #FFAE05; }
+      </style>
+   </head>
+   <body>
+      <select id="difficulty">
+         <option>Facile</option>
+         <option>Normale</option>
+         <option>Difficile</option>
+      </select>
+      <label>Pas de doublon <input type="checkbox" id="double" /></label>
+      <button id="play">Jouer</button>
+      <p id="score">0</p>
+      <section id="simon">
+         <section class="green"></section>
+         <section class="red"></section>
+         <section class="yellow"></section>
+         <section class="blue"></section>
+      </section>
+      <script>
+         let party = true, turn = false, double = true, time = 250, game, score, checkin
+
+         function initialyze(){
+            if(party){
+               party = false
+               game = []
+               score = 0
+               checkin = 0
+               document.querySelector('#score').innerHTML = score
+               setOptions()
+               removeActive()
+               game[0] = randomColor()
+               showColors()
+            }
+         }
+
+         function setOptions(){
+            let dif = document.querySelector('#difficulty')
+            switch(dif.selectedIndex){
+               case 0: time = 700
+               break
+               case 1: time = 400
+               break
+               case 2: time = 250
+               break
+               default: time = 400
+            }
+            double = !document.querySelector('#double').checked
+         }
+
+         function endGame(){
+            party = true
+            console.log(game)
+            document.querySelector('#score').innerHTML = score
+         }
+
+         function showColors(){
+            if(checkin < game.length){
+               document.querySelector('#simon .'+game[checkin]).classList.add('active')
+               checkin++
+               setTimeout(removeActive, time-200)
+               setTimeout(showColors, time)
+            }
+            else{
+               checkin = 0
+               turn = true
+               document.querySelector('#simon').classList.add('turn')
+            }
+         }
+
+         function removeActive(){
+            if(document.querySelector('#simon .active')){
+               document.querySelector('#simon .active').classList.remove('active')
+            }
+         }
+
+         function randomColor(){
+            let color = ['green', 'red', 'yellow', 'blue']
+            return color[Math.floor(Math.random()*color.length)+0]
+         }
+
+         function addColor(){
+            let color = randomColor()
+            if(double){
+               game[game.length] = color
+            }
+            else{
+               if(game[game.length-1] !== color){
+                  game[game.length] = color
+               }
+               else{
+                  addColor()
+               }
+            }
+         }
+
+         function check(color){
+            if(turn){
+               if(game[checkin] === color){
+                  if(game[checkin+1]){
+                     checkin++
+                  }
+                  else{
+                     turn = false
+                     score++
+                     checkin = 0
+                     document.querySelector('#simon').classList.remove('turn')
+                     document.querySelector('#score').innerHTML = score
+                     addColor()
+                     setTimeout(showColors, 500)
+                  }
+               }
+               else{
+                  document.querySelector('#simon').classList.remove('turn')
+                  turn = false
+                  endGame()
+               }
+            }
+         }
+
+         function getInput(){
+            if(this.classList.contains('active')){
+               this.classList.remove('active')
+               check(this.className)
+            }
+         }
+
+         function setActive(){
+            if(turn && this){this.classList.add('active')}
+         }
+
+
+         document.querySelector('#play').addEventListener('mouseup', initialyze)
+         document.querySelector('.green').addEventListener('mousedown', setActive)
+         document.querySelector('.green').addEventListener('mouseup', getInput)
+         document.querySelector('.red').addEventListener('mousedown', setActive)
+         document.querySelector('.red').addEventListener('mouseup', getInput)
+         document.querySelector('.yellow').addEventListener('mousedown', setActive)
+         document.querySelector('.yellow').addEventListener('mouseup', getInput)
+         document.querySelector('.blue').addEventListener('mousedown', setActive)
+         document.querySelector('.blue').addEventListener('mouseup', getInput)
+      </script>
+   </body>
+</html>
