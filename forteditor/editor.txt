@@ -1,0 +1,27 @@
+1 - carré destructible
+2 - carré non destructible
+3 - carré de fin de rally
+8 - carré non re-constructible
+9 - vide non constructible
+0 - vide constructible
+
+Conversion d'une map en txt :
+100 x 200
+
+de haut en bas puis de gauche à droite.
+
+P-{nbr frigo}-{Y frigo1}-{X frigo1}-{Y frigo2}-{X frigo2}-{X ligne gravité}-{Y1 rouge}-{X1 rouge}-{Y2 rouge}-{X2 rouge}-{Y1 bleu}-{X1 bleu}-{Y2 bleu}-{X2 bleu}-{Y spawn rouge}-{X spawn rouge}-{Y spawn bleu}-{X spawn bleu}-{plafond (0-9) sol (0-9)}-......
+
+exemple
+
+P-0-900-0-0-1-1-0-0-1-1-0-0-0-0-04-..
+-> Aucun frigo avec zone bleu & rouge aux positions {0, 0} et {1, 1}
+-> ligne de gravité à 900 en X
+-> plafond à 0 pixel et sol à 4 pixels
+
+P-2-100-50-100-150-500-40-90-60-110-140-90-160-110-0-0-0-0-92-...
+-> 2 frigo : le 1 premier à {100, 50} et le 2ème à {100, 150}
+-> ligne de gravité à 500 en X
+-> une zone rouge à {40, 90} et {60, 110}
+-> une zone bleu à {140, 90} et {160, 110}
+-> plafond à 9 pixels et sol à 2 pixels

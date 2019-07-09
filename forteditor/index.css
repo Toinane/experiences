@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#editor {
+  display: flex;
+}
+
+#menu {
+
+}
+
+#terrain {
+  width: 90vw;
+  height: 70vh;
+  overflow: scroll;
+  border-collapse: collapse;
+}
+
+tr {
+
+}
+tr td {
+  box-sizing: border-box;
+  background: #9E9EAF;
+  min-width: 8px;
+  min-height: 8px;
+  width: 8px;
+  height: 8px;
+  max-width: 8px;
+  max-height: 8px;
+}
+tr td:hover {
+  border: 1px solid lime;
+}
+
+.blue {
+  background: #1F243D;
+}
