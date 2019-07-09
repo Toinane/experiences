@@ -1,0 +1,46 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  border-bottom: 1px solid #E2E2E2;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+header div {
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+
+  #close {
+    background: #f9605c;
+  }
+  #reduce {
+    background: #f9b93f;
+  }
+  #expand {
+    background: #33c549;
+  }
+
+  #container{
+    width: 100%;
+    height: calc(100vh - 31px);
+    display: flex;
+  }
+
+    nav{
+      background: #efefef;
+      height: 100%;
+      width: 200px;
+     }
+
+    #writer{
+height: 100%;
+width: 100%;
+    }
